@@ -111,7 +111,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		modal.classList.add('show');
 		modal.classList.remove('hide');
 		document.body.style.overflow = 'hidden'; //убираем прокрутку экрана
-		clearTimeout(modalTimerId);
+		// clearTimeout(modalTimerId);
 	}
 
 	modalTrigger.forEach(btn => {
@@ -137,7 +137,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		}
 	});
 
-	const modalTimerId = setTimeout(openModal, 50000); //запуск окна по таймеру
+	// const modalTimerId = setTimeout(openModal, 50000); //запуск окна по таймеру
 
 	//
 	function showModalByScroll() {
@@ -299,6 +299,63 @@ window.addEventListener('DOMContentLoaded', () => {
 	/* fetch('http://localhost:3000/menu')
 		.then((data) => data.json())
 		.then(res => console.log(res));//вернет объект */
+
+	//======================== Slider =================================
+
+	const slides = document.querySelectorAll('.offer__slide'),
+		prev = document.querySelector('.offer__slider-prev'),
+		next = document.querySelector('.offer__slider-next'),
+		total = document.querySelector('#total'),
+		current = document.querySelector('#current');
+	let slideUndex = 1;
+
+	showSlides(slideUndex);
+
+	if (slides.length < 10) {
+		total.textContent = `0${slides.length}`;
+	} else {
+		total.textContent = slides.length;
+	}
+
+	function showSlides(n) {
+		if (n > slides.length) {
+			slideUndex = 1;
+		}
+		if (n < 1) {
+			slideUndex = slides.length;
+		}
+
+		slides.forEach(item => item.style.display = 'none');
+
+		slides[slideUndex - 1].style.display = 'block';
+
+		if (slides.length < 10) {
+			current.textContent = `0${slideUndex}`;
+		} else {
+			current.textContent = slideUndex;
+		}
+	}
+
+	function plusSlides(n) {
+		showSlides(slideUndex += n);
+	}
+
+	prev.addEventListener('click', () => {
+		plusSlides(-1);
+	});
+
+	next.addEventListener('click', () => {
+		plusSlides(1);
+	});
+
+
+
+
+
+
+
+
+
 
 });
 
