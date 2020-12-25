@@ -1,7 +1,4 @@
-function timer() {
-	// ======================= Timer ============================
-
-	const deadLine = '2020-12-31';
+function timer(id, deadLine) {
 
 	function getTimeRemaining(endtime) {
 		//превращает строку во время(в мс) и возвращает разницу
@@ -54,7 +51,7 @@ function timer() {
 		}
 	}
 
-	setClock('.timer', deadLine);
+	setClock(id, deadLine);
 }
 
-module.exports = timer;
+export default timer;

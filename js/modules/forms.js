@@ -1,7 +1,10 @@
-function forms() {
+import { openModal, closeModal } from './modal';
+import { postData } from '../services/servicces';
+
+function forms(formSelector, modalTimerId) {
 	//======================== Forms =================================
 
-	const forms = document.querySelectorAll('form');
+	const forms = document.querySelectorAll(formSelector);
 	// объект уведомлений о статусе отправки формы
 	const message = {
 		loading: 'img/form/spinner.svg',
@@ -13,17 +16,6 @@ function forms() {
 	forms.forEach(item => {
 		bindPostData(item);
 	});
-
-	// настраиваем запрос и возвращаем ответ в json
-	const postData = async (url, data) => {
-		const res = await fetch(url, {
-			method: 'POST',
-			headers: { 'Content-type': 'application/json' },
-			body: data
-		});
-
-		return await res.json();
-	};
 
 	// функция отправки данных
 	function bindPostData(form) {
@@ -63,7 +55,7 @@ function forms() {
 		const prevModalDiallog = document.querySelector('.modal__dialog');
 
 		prevModalDiallog.classList.add('hide');
-		openModal();
+		openModal('.modal', modalTimerId);
 
 		const thanksModal = document.createElement('div');
 		thanksModal.classList.add('modal__dialog');
@@ -81,9 +73,9 @@ function forms() {
 			thanksModal.remove();
 			prevModalDiallog.classList.add('show');
 			prevModalDiallog.classList.remove('hide');
-			closeModal();
+			closeModal('.modal');
 		}, 4000);
 	}
 }
 
-module.exports = forms;
+export default forms;
