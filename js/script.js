@@ -1,3 +1,6 @@
+require('es6-promise/auto');
+import 'nodelist-foreach-polyfill';
+
 import calc from './modules/calc';
 import cards from './modules/cards';
 import forms from './modules/forms';
